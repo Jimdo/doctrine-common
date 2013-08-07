@@ -91,7 +91,8 @@ abstract class FileCache extends CacheProvider
      */
     protected function getFilename($id)
     {
-        $path = implode(str_split(md5($id), 12), DIRECTORY_SEPARATOR);
+        $hash = hash('sha256', $id);
+        $path = implode(str_split($hash, 2), DIRECTORY_SEPARATOR);
         $path = $this->directory . DIRECTORY_SEPARATOR . $path;
 
         return $path . DIRECTORY_SEPARATOR . $id . $this->extension;
